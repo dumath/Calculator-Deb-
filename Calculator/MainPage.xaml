@@ -1,0 +1,113 @@
+﻿<Page
+    x:Class="Calculator.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Calculator"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+
+    <Grid KeyDown="Grid_KeyDown">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <Grid x:Name="partialView" Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="1.5*"/>
+                <RowDefinition Height="4*"/>
+                <RowDefinition Height="20"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="20"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="20"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock x:Name="result" Grid.Row="1" Grid.Column="1" Margin="10" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Text="{Binding Expression.Result, Mode=TwoWay}" FontSize="20"/>
+            <TextBlock x:Name="field"   Grid.Row="2" Grid.Column="1" Margin="10" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Text="0" TextAlignment="Right" FontSize="40"/>
+            <Grid Grid.Row="3" Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <!--1 строка кнопок-->
+                <Button x:Name="numSev" Grid.Row="0" Grid.Column="0" Margin="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="7" FontWeight="Bold" FontSize="20" Click="Button_Click"/>
+                <Button x:Name="numEig" Grid.Row="0" Grid.Column="1" Margin="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="8" FontWeight="Bold" FontSize="20" Click="Button_Click"/>
+                <Button x:Name="numNin" Grid.Row="0" Grid.Column="2" Margin="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="9" FontWeight="Bold" FontSize="20" Click="Button_Click"/>
+                <Button x:Name="numRes" Grid.Row="0" Grid.Column="3" Margin="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="=" FontSize="20" Click="Button_Result_Operator_Click"/>
+                <Button x:Name="numNeg" Grid.Row="0" Grid.Column="4" Margin="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="-/+" FontSize="20" Click="Button_Negative_Click"/>
+
+
+                <!--2 строка кнопок-->
+                <Button x:Name="numFou" Grid.Row="1" Grid.Column="0" Margin="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="4" FontWeight="Bold" FontSize="20" Click="Button_Click"/>
+                <Button x:Name="numFiv" Grid.Row="1" Grid.Column="1" Margin="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="5" FontWeight="Bold" FontSize="20" Click="Button_Click"/>
+                <Button x:Name="numSix" Grid.Row="1" Grid.Column="2" Margin="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="6" FontWeight="Bold" FontSize="20" Click="Button_Click"/>
+                <Button x:Name="numAdd" Grid.Row="1" Grid.Column="3" Margin="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="+" FontSize="20" Click="Button_Add_Operator_Click"/>
+                <Button x:Name="numDel" Grid.Row="1" Grid.Column="4" Margin="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontSize="20" Content="&lt;=" Click="Button_Delete_Click"/>
+
+                <!--3 строка кнопок-->
+                <Button x:Name="numOne" Grid.Row="2" Grid.Column="0" Margin="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="1" FontWeight="Bold" FontSize="20" Click="Button_Click"/>
+                <Button x:Name="numTwo" Grid.Row="2" Grid.Column="1" Margin="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="2" FontWeight="Bold" FontSize="20" Click="Button_Click"/>
+                <Button x:Name="numThr" Grid.Row="2" Grid.Column="2" Margin="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="3" FontWeight="Bold" FontSize="20" Click="Button_Click"/>
+                <Button x:Name="numSub" Grid.Row="2" Grid.Column="3" Margin="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="-" FontSize="20" Click="Button_Sub_Operator_Click"/>
+                <Button Grid.Row="2" Grid.Column="4" Margin="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+
+                <!--4 строка кнопок-->
+                <Button x:Name="numMul" Grid.Row="3" Grid.Column="0" Margin="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="*" FontSize="20" Click="Button_Myltiply_Operator_Click"/>
+                <Button x:Name="numZero" Grid.Row="3" Grid.Column="1" Margin="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="0" FontWeight="Bold" FontSize="20" Click="Button_Click_Zero"/>
+                <Button x:Name="numSep" Grid.Row="3" Grid.Column="2" Margin="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="." FontSize="20" Click="Button_Click_Point" RenderTransformOrigin="0.5,0.5"/>
+                <Button x:Name="numRest" Grid.Row="3" Grid.Column="3" Margin="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="C" FontSize="20" Click="Click_Reset"/>
+                <Button x:Name="numDiv" Grid.Row="3" Grid.Column="4" Margin="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="/" FontSize="20" Click="Button_Divide_Operator_Click"/>
+            </Grid>
+        </Grid>
+        <Grid x:Name="fullView" Grid.Column="1" Visibility="Visible">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="60"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="20"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="20"/>
+                <ColumnDefinition Width="*" MinWidth="260"/>
+                <ColumnDefinition Width="20"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Row="1" Grid.Column="1" Margin="10" VerticalAlignment="Stretch" HorizontalAlignment="Left" Text="История"/>
+            <TextBlock x:Name="history" Grid.Row="2" Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Text="{Binding Expression.History,Mode=TwoWay}" TextAlignment="Left" TextWrapping="Wrap"  Width="260"/>
+        </Grid>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="600"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="fullView.Visibility" Value="Visible"/>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="fullView.Visibility" Value="Collapsed"/>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+    </Grid>
+</Page>
